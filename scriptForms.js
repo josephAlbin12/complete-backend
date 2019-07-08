@@ -11,7 +11,7 @@
 // NEED to add time and sign-in/out checking
 // In the future, maybe consider blacklisting for each event so no duplicates
 var Airtable = require('airtable');
-var base = new Airtable({apiKey: 'keyYlHLddpShtr8mH'}).base('app1uoqBzrNjrnB28');
+var base = new Airtable({apiKey: 'API_KEY'}).base('app1uoqBzrNjrnB28');
 var attendance = [];
 var organizations = [];
 var retrievedOrgs = []
