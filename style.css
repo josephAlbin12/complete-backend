@@ -13,13 +13,12 @@
 
 
 #whitespace {
-	padding-bottom: 28px;
-	text-align: center;
+  padding: 28px;
+  text-align: center;
 }
 
-
 h1 {
-	color: black;
+  color: black;
     font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
     font-size: 30px;
     font-weight: 500;
