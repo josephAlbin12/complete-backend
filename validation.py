@@ -1,6 +1,8 @@
 # Requires: airtable-python wrapper
 # Currently parses a CSV file instead of directly pulling data from Airtable
+# Currently catches multiple entries with same ut eid
 # Send a log of any suspicious activity
+# TODO: big concern is false UT EIDs; will need to have an automated way to confirm
 
 from airtable import Airtable
 # constants is an gitignored file which holds Airtable API information
@@ -39,8 +41,6 @@ def checkTime(time, time2, event, eid):
         return True
 
     return False
-# TODO: currently only checks if entries fall under required parameters; still need
-#  to create a log to keep track of "questionable EIDs" found during the scan
 
 
 # this blacklist stores "EID + Event"
@@ -90,15 +90,12 @@ for index, row in df.iterrows():
                 cheaters.append(eid + " " + event)
             blacklist.append(eid + event)
 
+print("Blacklist")
 print(blacklist)
 print("Correct Attendance Log")
 print(success)
 print("Suspicious Attendance Log")
 print(cheaters)
-
-
-
-
 
 
 

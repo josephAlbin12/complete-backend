@@ -1,2 +1,2 @@
-# compete-backend
-Back End for Compete.
+# complete-backend
+
