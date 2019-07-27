@@ -3,8 +3,10 @@ from airtable import Airtable
 import pandas as pd
 import time
 
-base_key = 'app801qX3wwQdSaoT'
-api_key = 'keyVrbI2sZnDNOp5E'
+# constants is an gitignored file which holds Airtable API information
+from constants import BASE_KEY, API_KEY
+base_key = BASE_KEY
+api_key = API_KEY
 
 at = Airtable(base_key, 'Imported table', api_key)
 points = Airtable(base_key, 'Leaderboard', api_key)
