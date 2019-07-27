@@ -13,7 +13,6 @@ import pandas as pd
 # records = table.get_all()
 
 # finds difference in 24hr time
-# TODO: check if start and end times follow the official start and end times [DONE]
 # test event is 30 min
 # real events are 1 or 2 hours
 def checkTime(time, time2, event, eid):
@@ -25,14 +24,21 @@ def checkTime(time, time2, event, eid):
     # because that's the order entries should be entered
     # then, we blacklist these EIDs so we won't double count them
 
-    # TODO: need to set a timeDict key variable for modularity [DONE]
+    # vars for timeDict keys
     start = event + " Start"
     end = event + " End"
-
-    if t1[0] == t2[0] == timeDict[event] and abs(int(t1[1]) - timeDict[start]) <= 5 \
-            and abs(int(t2[1]) - timeDict[end]) <= 5:
+    print(timeDict[event])
+    print(abs(int(t1[1]) - timeDict[start]))
+    print(abs(int(t2[1]) - timeDict[end]))
+    # TODO: this conditional works, but can definitely use a better way to solve it
+    if t1[0] == t2[0] == timeDict[event] and (abs(int(t1[1]) - timeDict[start]) <= 5
+            or 41 <= abs(int(t1[1]) - timeDict[start]) <= 45) and (abs(int(t2[1]) - timeDict[end]) <= 5
+            or 41 <= abs(int(t2[1]) - timeDict[end]) <= 45):
         print('yeet')
         success.append(eid)
+        return True
+
+    return False
 # TODO: currently only checks if entries fall under required parameters; still need
 #  to create a log to keep track of "questionable EIDs" found during the scan
 
@@ -42,14 +48,14 @@ def checkTime(time, time2, event, eid):
 # event with the same EID
 blacklist = []
 success = []
-fail = []
+cheaters = []
 timeDict = {
-    "Event 1": "7/24/2019",
-    "Event 1 Start": 930,
-    "Event 1 End": 1000,
-    "Event 2": "7/24/2019",
-    "Event 2 Start": 930,
-    "Event 2 End": 1000,
+    "Event 1": "7/22/2019",
+    "Event 1 Start": 200,
+    "Event 1 End": 230,
+    "Event 2": "7/23/2019",
+    "Event 2 Start": 1400,
+    "Event 2 End": 1500,
     "Event 3": "7/24/2019",
     "Event 3 Start": 930,
     "Event 3 End": 1000
@@ -80,11 +86,13 @@ for index, row in df.iterrows():
             # these parameters assume that time = sign-in and time2 = sign-out
             # we make sure this is the case in the script
             # need event parameter to find correct dictionary entry
-            checkTime(time, time2, event, eid)
+            if checkTime(time, time2, event, eid) is False:
+                cheaters.append(eid)
             blacklist.append(eid + event)
 
 print(blacklist)
 print(success)
+print(cheaters)
 
 
 
