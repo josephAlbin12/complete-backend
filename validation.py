@@ -35,7 +35,7 @@ def checkTime(time, time2, event, eid):
             or 41 <= abs(int(t1[1]) - timeDict[start]) <= 45) and (abs(int(t2[1]) - timeDict[end]) <= 5
             or 41 <= abs(int(t2[1]) - timeDict[end]) <= 45):
         print('yeet')
-        success.append(eid)
+        success.append(eid + " " + event)
         return True
 
     return False
@@ -87,11 +87,13 @@ for index, row in df.iterrows():
             # we make sure this is the case in the script
             # need event parameter to find correct dictionary entry
             if checkTime(time, time2, event, eid) is False:
-                cheaters.append(eid)
+                cheaters.append(eid + " " + event)
             blacklist.append(eid + event)
 
 print(blacklist)
+print("Correct Attendance Log")
 print(success)
+print("Suspicious Attendance Log")
 print(cheaters)
 
 
